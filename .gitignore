@@ -1,0 +1,11 @@
+# Ignore IDE/editor settings
+.vscode/
+
+# Ignore environment files (keep secrets safe)
+.env
+frontend/.env
+backend/.env
+
+# Ignore dependencies (they can be reinstalled using package.json or requirements.txt)
+frontend/node_modules/
+backend/node_modules/

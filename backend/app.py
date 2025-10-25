@@ -6,37 +6,42 @@ import pandas as pd
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all domains
 
-@app.route('/home')
+@app.route('/data_options')
 def home_page():
-    data = {
-        'name': "zakir",
-        'age': "999",
-        'date': "this is date",
-        'programming': "python and java"
+    # Read csv file
+    df = pd.read_csv("../Data/clean_data.csv")
+    # select three columns name , company and fuel_type
+    data_options = {
+        "name": sorted(df['name'].dropna().unique().tolist()),
+        "company": sorted(df['company'].dropna().unique().tolist()),
+        "fuel_type": sorted(df['fuel_type'].dropna().unique().tolist())
     }
-    return jsonify(data)
+    return jsonify(data_options)
 
-# @app.route('/predict',methods=['POST'])
-# def predict():
-#     # get all form data send by user
-#     name = request.form.get('name')
-#     company = request.form.get('comapny')
-#     year = int(request.form.get('year'))
-#     kms_driven = int(request.form.get('kms_driven'))
-#     fuel_type = request.form.get('fuel_type')
+@app.route('/predict',methods=['POST'])
+def predict():
+    data = request.get_json()
+    print("Data send by user : ",data)
+    predection = getPredection(data)
+    return jsonify({"predection" : predection})
 
-#     # load  the model
-#     with open('../Data/carPricePredectionModel.pkl', 'rb') as file:
-#         model = pickle.load(file)
+def getPredection(data):
 
-#     user_input = pd.DataFrame([[name,company,year,kms_driven,fuel_type]],columns=['name','company','year','kms_driven','fuel_type'])
+    name = data.get('name')
+    company = data.get('company')
+    year = int(data.get('year'))
+    kms_driven = int(data.get('kms_driven'))
+    fuel_type = data.get('fuel_type')
 
-#     # make prediction
-#     prediction = model.predict(user_input)[0]
+    # load  the model
+    with open('../Data/carPricePredectionModel.pkl','rb') as file:
+        model = pickle.load(file)
 
-#     print("Your card price is : ",prediction)
+    user_input = pd.DataFrame([[name,company,year,kms_driven,fuel_type]],columns=['name','company','year','kms_driven','fuel_type'])
 
-#     return "<h1>Predicted Price is : {} </h1>".format(prediction)
+    # make predection
+    prediction = model.predict(user_input)[0]
+    return prediction
 
 if __name__ == '__main__':
     app.run(debug=True)
