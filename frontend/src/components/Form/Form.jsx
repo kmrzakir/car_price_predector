@@ -4,6 +4,7 @@ import Input from "../common/Input";
 import useInputErrorStore from "../../store/useStore";
 import useCarForm from "./hooks/useCarForm";
 import Loader from "./Loader";
+import ResultCard from "../cards/ResultCard";
 
 function Form({ data }) {
   const { yearInput, kmsDrivenInput } = useInputErrorStore();
@@ -14,11 +15,19 @@ function Form({ data }) {
     prediction,
     handleChange,
     handleSubmit,
+    cancleCard,
   } = useCarForm(data);
 
   return (
     <div className="relative flex items-center justify-center ">
       {loader && <Loader />}
+      {prediction && (
+        <ResultCard
+          formData={formData}
+          prediction={prediction}
+          onClick={cancleCard}
+        />
+      )}
       <form
         onSubmit={loader ? undefined : handleSubmit}
         className={loader ? "opacity-50 flex-1" : "flex-1"}
@@ -69,11 +78,11 @@ function Form({ data }) {
         >
           Submit
         </button>
-        {prediction && (
+        {/* {prediction && (
           <p className="text-auto font-bold text-gray-800 mt-2 ">
             Car price will be : {prediction}
           </p>
-        )}
+        )} */}
       </form>
     </div>
   );

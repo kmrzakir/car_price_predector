@@ -14,6 +14,7 @@ export default function useCarForm(data) {
 
   const [loader, setLoader] = useState(false);
   const [prediction, setPrediction] = useState(null);
+  const [cancleCardState, setCancleCardState] = useState(true);
 
   // run when the page first loads
   useEffect(() => {
@@ -38,6 +39,10 @@ export default function useCarForm(data) {
     setFormData((prev) => ({ ...prev, name: filter[0] || "" }));
   };
 
+  const cancleCard = () => {
+    setPrediction(null);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -55,7 +60,7 @@ export default function useCarForm(data) {
     try {
       setLoader(true);
       const res = await handleFormSubmit(formData);
-      setPrediction(res.prediction);
+      setPrediction(res.predection);
     } catch (err) {
       console.error("Error fetching prediction:", err);
     } finally {
@@ -70,5 +75,6 @@ export default function useCarForm(data) {
     prediction,
     handleChange,
     handleSubmit,
+    cancleCard,
   };
 }

@@ -8,7 +8,6 @@ CORS(app)  # Enable CORS for all domains
 
 @app.route('/data_options')
 def home_page():
-    print("chnage my zakir-dar on branch my_branch")
     # Read csv file
     df = pd.read_csv("../Data/clean_data.csv")
     # select three columns name , company and fuel_type
@@ -24,6 +23,7 @@ def predict():
     data = request.get_json()
     print("Data send by user : ",data)
     predection = getPredection(data)
+    predection = round(predection, 3)
     return jsonify({"predection" : predection})
 
 def getPredection(data):
