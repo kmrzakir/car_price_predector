@@ -41,23 +41,7 @@ Here’s how the website looks 👇
 
 ## 📂 Folder Structure
 
-car-price-predictor/
-│
-├── backend/
-│ ├── app.py # Flask server
-│ ├── model/
-│ │ └── car_price_model.pkl
-│ ├── requirements.txt
-│ └── train_model.ipynb
-│
-├── frontend/
-│ ├── src/
-│ │ ├── App.jsx
-│ │ └── components/
-│ ├── package.json
-│ └── public/
-│
-└── README.md
+![Car Price Predictor UI](./folder_structure.png)
 
 ---
 
