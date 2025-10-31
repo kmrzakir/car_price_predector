@@ -1,4 +1,4 @@
-const BASE_UTL = "https://fluffy-cod-pjggvj5vwq93rvr9-5000.app.github.dev";
+const BASE_UTL = "https://car-price-predector-0gik.onrender.com/";
 
 export async function getDataOptions() {
   const responce = await fetch(`${BASE_UTL}/data_options`);

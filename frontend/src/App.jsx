@@ -15,7 +15,6 @@ function App() {
       try {
         const data = await getDataOptions();
         setDataOptions(data);
-        console.log("OPTION DATA : ++++++++++++++++++ : ", data);
       } catch (err) {
         console.err("Some error  while fetching options data ", err);
       }
