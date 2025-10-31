@@ -23,7 +23,7 @@ After submitting, it predicts the **estimated price** of the car using a trained
 ### Web Interface
 Here’s how the website looks 👇  
 
-![Car Price Predictor UI](./frontend/public/ui-preview.png)
+![Car Price Predictor UI](./web_image.png)
 
 *(You can replace this image name with your actual image file — for example, the screenshot you uploaded.)*
 
