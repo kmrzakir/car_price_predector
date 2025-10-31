@@ -9,7 +9,7 @@ CORS(app)  # Enable CORS for all domains
 @app.route('/data_options')
 def home_page():
     # Read csv file
-    df = pd.read_csv("../Data/clean_data.csv")
+    df = pd.read_csv("./Data/clean_data.csv")
     # select three columns name , company and fuel_type
     data_options = {
         "name": sorted(df['name'].dropna().unique().tolist()),
@@ -35,7 +35,7 @@ def getPredection(data):
     fuel_type = data.get('fuel_type')
 
     # load  the model
-    with open('../Data/carPricePredectionModel.pkl','rb') as file:
+    with open('./Data/carPricePredectionModel.pkl','rb') as file:
         model = pickle.load(file)
 
     user_input = pd.DataFrame([[name,company,year,kms_driven,fuel_type]],columns=['name','company','year','kms_driven','fuel_type'])
