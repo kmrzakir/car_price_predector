@@ -8,7 +8,7 @@ CORS(app)  # Enable CORS for all domains
 
 @app.get('/')
 def health():
-    return ok
+    return "ok",200
 
 @app.route('/data_options')
 def home_page():
