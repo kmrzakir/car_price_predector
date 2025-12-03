@@ -6,6 +6,10 @@ import pandas as pd
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all domains
 
+@app.get('/')
+def health():
+    return ok
+
 @app.route('/data_options')
 def home_page():
     # Read csv file
